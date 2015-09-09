@@ -1,0 +1,33 @@
+{
+  "name": "persistant-http-server",
+  "version": "0.1.0",
+  "description": "a persistance RESTful HTTP server",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sschadwick/persistant-http-server.git"
+  },
+  "keywords": [
+    "persistance",
+    "REST",
+    "HTTP",
+    "server"
+  ],
+  "author": "Steven Chadwick sschadwick@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sschadwick/persistant-http-server/issues"
+  },
+  "homepage": "https://github.com/sschadwick/persistant-http-server#readme",
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.3.2"
+  }
+}
