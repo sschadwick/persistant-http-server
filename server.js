@@ -6,13 +6,14 @@ var server = http.createServer(function(req, res) {
   var path = req.url.split('/');
 
   var notes = fs.readdirSync('./data');
-  var numbers = []; //parse numbered file names
+  var numbers = [0]; //parse numbered file names
 
-  for (var num in notes) {
-    if (!isNaN(parseInt(notes[num]))) {
-      numbers.push(parseInt(notes[num]));
+  for (var file in notes) {
+    if (!isNaN(parseInt(notes[file]))) {
+      numbers.push(parseInt(notes[file]));
     }
   }
+
   var maxFile = (Math.max.apply(Math, numbers)); //find max file number so far.
   var nextFile = maxFile + 1; //this will be the next file created
 
@@ -38,10 +39,10 @@ var server = http.createServer(function(req, res) {
     })
   }
 
-  if (req.method === 'PUT') {
+  if (req.method === 'PUT') { //Not currently implemented
   }
 
-  if (req.method === 'PATCH') {
+  if (req.method === 'PATCH') { //Not currently implemented
   }
 
   if (req.method === 'DELETE') {
