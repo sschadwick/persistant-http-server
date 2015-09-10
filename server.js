@@ -7,7 +7,11 @@ var server = http.createServer(function(req, res) {
 
   if (path[1] === 'notes') {
 
-    var notes = fs.readdirSync('./data');
+    var notes = [];
+    fs.readdir('./data', function(err, files) {
+      notes = files;
+    });
+
     var numbers = [0]; //parse numbered file names
 
     for (var file in notes) {
@@ -15,7 +19,6 @@ var server = http.createServer(function(req, res) {
         numbers.push(parseInt(notes[file]));
       }
     }
-
     var maxFile = (Math.max.apply(Math, numbers)); //find max file number so far.
     var nextFile = maxFile + 1; //this will be the next file created
 

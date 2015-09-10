@@ -30,10 +30,18 @@ describe('POST route', function() {
   });
 });
 
+var numbers = [0];
+for (var file in data) {
+  if (!isNaN(parseInt(data[file]))) {
+    numbers.push(parseInt(data[file]));
+  }
+}
+var maxFile = (Math.max.apply(Math, numbers)); //find max file number so far.
+
 describe('GET route', function() {
   it('should read the stored request', function(done) {
     chai.request('localhost:3000')
-    .get('/notes/1')
+    .get('/notes/' + maxFile)
     .end(function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.have.status(200);
@@ -47,9 +55,9 @@ describe('GET route', function() {
 describe('DELETE route', function() {
   it('should delete the newly created file', function(done) {
     chai.request('localhost:3000')
-    .delete('/notes/1')// need to make it delete new file
+    .delete('/notes/' + maxFile)
     .end(function(err, res) {
-      fs.readdirSync('./data', function(err, files) {
+      fs.readdir('./data', function(err, files) {
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
         expect(files.length).to.eql(data.length);
