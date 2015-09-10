@@ -8,34 +8,37 @@ var fs = require('fs');
 
 chai.use(chaihttp);
 
+describe('GET route', function() {
+  it('should read a stored request', function(done) {
+    chai.request('localhost:3000')
+    .get('/notes/1')
+    .end(function(err, res) {
+      expect(err).to.eql(null);
+      expect(res).to.have.status(200);
+      expect(JSON.parse(res.text).hasOwnProperty('msg')).to.eql(true);
+      expect(JSON.parse(res.text).msg).to.eql('Another message?!?')
+    })
+    done();
+  })
+})
 
-// describe('GET route', function() {
-//   it('should read a stored request', function() {
-
-//     expect()
-//   })
-
-//   it('should retrieve the store file for a GET request', function(){
-
-//   })
-
-// })
-
-var data = fs.readdirSync('./data');
+var data = [];
 var newData = [];
+fs.readdir('./data', function(err, files) {
+  data = files;
+});
 
 describe('POST route', function() {
   it('should create a new file', function(done) {
-    // var data = fs.readdirSync('./data');
-
     chai.request('localhost:3000')
     .post('/notes')
-    .send({msg: "'Another message?!?'"})
+    .send({msg: 'Another message?!?'})
     .end(function(err, res) {
-      newData = fs.readdirSync('./data');
-      expect(err).to.eql(null);
-      expect(res).to.have.status(200);
-      expect(newData.length).to.be.greaterThan(data.length);
+      fs.readdir('./data', function(err, files) {
+        expect(err).to.eql(null);
+        expect(res).to.have.status(200);
+        expect(files.length).to.be.greaterThan(data.length);
+      });
       done();
     })
   })
