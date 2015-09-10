@@ -7,9 +7,9 @@ POST new data:
 ```superagent localhost:3000/notes POST {msg: "'Your very own data here'"}```
 
 GET saved data:
-```superagent localhost:3000/notes/1```
-> {"msg": "Your very own data here"}
+```superagent localhost:3000/notes/<file>```
+{"msg": "Your very own data here"}
 
 DELETE saved data:
-```superagent localhost:3000/notes/1 DELETE```
->That log has been deleted
+```superagent localhost:3000/notes/<file> DELETE```
+That log has been deleted

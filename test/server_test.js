@@ -30,6 +30,7 @@ describe('POST route', function() {
   });
 });
 
+//calculate max file
 var numbers = [0];
 for (var file in data) {
   if (!isNaN(parseInt(data[file]))) {
